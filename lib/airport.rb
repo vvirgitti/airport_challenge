@@ -1,6 +1,12 @@
+require_relative 'Weather'
+
 class Airport
 
+
+
 DEFAULT_CAPACITY = 10
+
+include Weather
 
 
 def initialize(options = {})
@@ -19,26 +25,21 @@ end
 
 
 def park(plane)
+	raise 'The airport is full - Plane not authorized to land' if full?
+	raise 'Stormy weather - Plane cannot land' if stormy!
 	planes << plane
 end 
 
 
 def release(plane)
+	raise 'Stormy weather - Plane cannot take off' if stormy!
 	planes.delete(plane)
-end
-
-
-def capacity
-	@capacity = 10
 end
 
 
 def full?
 	planes.count == @capacity
 end
-
-
-
 
 
 end
