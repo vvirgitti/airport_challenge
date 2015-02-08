@@ -13,7 +13,7 @@ describe Airport do
 	context 'taking off and landing' do 
 	
 		it 'can allow a plane to land' do 
-			allow(airport).to receive(:sunny?) {'sunny'}
+			# allow(airport).to receive(:sunny?) {'sunny'}
 			expect{airport.park(plane)}.to change{airport.plane_count}.by 1
 		end
 
@@ -51,10 +51,10 @@ describe Airport do
 		end
 
 
-		it 'can refuse a plane to land when there is a storm' do
-			allow(airport).to receive(:stormy!) {'stormy'}
-			expect{airport.park(plane)}. to raise_error(RuntimeError, 'Stormy weather - Plane cannot land')
-		end
+		# it 'can refuse a plane to land when there is a storm' do
+		# 	allow(airport).to receive(:stormy!) {'stormy'}
+		# 	expect{airport.park(plane)}. to raise_error(RuntimeError, 'Stormy weather - Plane cannot land')
+		# end
 
 	end
 

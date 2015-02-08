@@ -5,7 +5,8 @@ describe Plane do
 
 
 	let(:plane){Plane.new}
-	let(:weather){Weather.new}
+	let(:weather){double :weather}
+	let(:airport){double :airport}
 
 
 	context 'taking off and landing' do 
@@ -26,62 +27,35 @@ describe Plane do
 			expect(plane).to be_flying
 		end
 
+	end
 
 
-	# context 'the weather is sunny' do
+	context 'weather condition' do
 
-	# 	it 'can take off from the airport' do
-	# 		plane.takeoff!
-	# 		expect(plane).to be_flying
-	# 	end
+		it 'cannot land at the airport' do
+			allow(plane).to receive(:stormy!) {'stormy'}
+			expect{plane.landed!}.to raise_error(RuntimeError, 'Stormy weather - Plane cannot land')
+		end
 
-		
-	# 	it 'can land at the airport' do
-	# 	end
-
-
-
-	# context 'the weather is stormy' do
-
-	# 	it 'cannot land at the airport' do
-	# 	end
-
-	# 	it 'cannot take off from the airport' do
-	# 	end
-
-
-
-	# context 'the airport is not full' do
-
-	# 	it 'can land at the airport' do
-	# 	end
-
-
-	# 	it 'can take off from the airport' do
-	# 	end
-
-
-
-
-
-
-
-# it 'can take off from the aiport' do
-# 	weather = double (:weather)
-
-# 	allow(weather).to receive(:sunny) {true}
-# 	expect(weather).to start_with "sunny"
-# 	plane.takeoff!
-# 	expect(plane).to be_flying
-
-# end
+		# it 'cannot take off from the airport' do
+		# 	allow(plane). to receive(:stormy!) {'stormy}'}
+		# 	expect{plane.takeoff!}.to raise_error(RuntimeError 'Stormy weather - Plane cannot takeoff')
+		# end
 	
-	# end
+	end
 
-	# end
 
-	# end
+	context 'traffic control' do
+
+		it 'cannot land at the aiport as the aiport is full' do
+			20.times {plane.landed!}
+			expect(airport).to be_full
+			expect{plane.landed}.to raise_error(RuntimeError, 'Airport full, plane cannot land')
+		end
 
 	end
+
+
+
 	
 end
