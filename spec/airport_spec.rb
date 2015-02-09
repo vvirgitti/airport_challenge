@@ -1,14 +1,11 @@
 require 'airport'
 require 'plane'
-require 'weather'
 	
 describe Airport do
 
-
-	let(:airport){Airport.new(capacity: 10)}
+	let(:capacity) { 10 }
+	let(:airport){Airport.new(capacity: capacity)}
 	let(:plane){double :plane}
-	let(:weather){double :weather}
-
 
 	context 'taking off and landing' do 
 	
@@ -27,22 +24,22 @@ describe Airport do
 	end
 
 
-	# context 'traffic control' do 
+	context 'traffic control' do 
 
-	# 	it 'should know when it is full' do
-	# 		allow(airport).to receive(:stormy!).and_return(false)
-	# 		expect(airport).not_to be_full
-	# 		20.times {airport.park(plane)}
-	# 		expect(airport).to be_full
-	# 	end
+		it 'should know when it is full' do
+			allow(airport).to receive(:stormy!).and_return(false)
+			capacity.times {airport.park(plane)}
+			expect(airport).to be_full
+		end
 
 
-	# # # 	it 'can refuse a plane to land if it is full' do
-	# # # 		20.times {airport.park(plane)}
-	# # # 		expect{airport.park(plane)}.to raise_error(RuntimeError, 'The airport is full - Plane not authorized to land')
-	# # # 	end
+		it 'can refuse a plane to land if it is full' do
+			allow(airport).to receive(:stormy!).and_return(false)
+			capacity.times {airport.park(plane)}
+			expect{airport.park(plane)}.to raise_error(RuntimeError, 'The airport is full - Plane not authorized to land')
+		end
 
-	# end
+	end
 
 	
 	context 'weather conditions' do 

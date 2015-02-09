@@ -1,4 +1,4 @@
-require_relative 'Weather'
+require_relative 'weather'
 
 class Airport
 
@@ -25,6 +25,7 @@ end
 
 def park(plane)
 	raise 'Stormy weather - Plane cannot land' if stormy!
+	raise 'The airport is full - Plane not authorized to land' if full?
 	planes << plane
 end 
 
@@ -36,7 +37,7 @@ end
 
 
 def full?
-	planes.count == @capacity
+	planes.count >= @capacity
 end
 
 

@@ -1,24 +1,22 @@
 module Weather
 
-
-# def sunny?
+# def stormy!
 # 	random_weather = ["sunny", "stormy"]
-# 	if random_weather.sample == "sunny"
-# 		@sunny = true
+# 	if random_weather.sample == "stormy"
+# 		@stormy = true
 # 	else
-# 		@sunny = false
+# 		@stormy = false
 # 	end
 # end
 
 
 def stormy!
-	random_weather = ["sunny", "stormy"]
-	if random_weather.sample == "stormy"
+	if rand(1..10) >= 8
 		@stormy = true
 	else
 		@stormy = false
 	end
-end
 
+end
 
 end
