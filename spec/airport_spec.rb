@@ -6,19 +6,20 @@ describe Airport do
 
 
 	let(:airport){Airport.new(capacity: 10)}
-	let(:plane){Plane.new}
+	let(:plane){double :plane}
 	let(:weather){double :weather}
 
 
 	context 'taking off and landing' do 
 	
 		it 'can allow a plane to land' do 
-			# allow(airport).to receive(:sunny?) {'sunny'}
+			allow(airport).to receive(:stormy!).and_return(false)
 			expect{airport.park(plane)}.to change{airport.plane_count}.by 1
 		end
 
 
 		it 'can allow a plane to take off' do
+			allow(airport).to receive(:stormy!).and_return(false)
 			airport.park(plane)
 			expect{airport.release(plane)}.to change{airport.plane_count}. by -1
 		end
@@ -29,16 +30,17 @@ describe Airport do
 	# context 'traffic control' do 
 
 	# 	it 'should know when it is full' do
+	# 		allow(airport).to receive(:stormy!).and_return(false)
 	# 		expect(airport).not_to be_full
 	# 		20.times {airport.park(plane)}
 	# 		expect(airport).to be_full
 	# 	end
 
 
-	# 	it 'can refuse a plane to land if it is full' do
-	# 		20.times {airport.park(plane)}
-	# 		expect{airport.park(plane)}.to raise_error(RuntimeError, 'The airport is full - Plane not authorized to land')
-	# 	end
+	# # # 	it 'can refuse a plane to land if it is full' do
+	# # # 		20.times {airport.park(plane)}
+	# # # 		expect{airport.park(plane)}.to raise_error(RuntimeError, 'The airport is full - Plane not authorized to land')
+	# # # 	end
 
 	# end
 
@@ -46,15 +48,15 @@ describe Airport do
 	context 'weather conditions' do 
 
 		it 'can refuse a plane to take off when there is a storm' do
-			allow(airport).to receive(:stormy!) {'stormy'}
+			allow(airport).to receive(:stormy!).and_return(true)
 			expect{airport.release(plane)}. to raise_error(RuntimeError, 'Stormy weather - Plane cannot take off')
 		end
 
 
-		# it 'can refuse a plane to land when there is a storm' do
-		# 	allow(airport).to receive(:stormy!) {'stormy'}
-		# 	expect{airport.park(plane)}. to raise_error(RuntimeError, 'Stormy weather - Plane cannot land')
-		# end
+		it 'can refuse a plane to land when there is a storm' do
+			allow(airport).to receive(:stormy!).and_return(true)
+			expect{airport.park(plane)}. to raise_error(RuntimeError, 'Stormy weather - Plane cannot land')
+		end
 
 	end
 

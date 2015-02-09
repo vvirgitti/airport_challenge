@@ -24,8 +24,7 @@ end
 
 
 def park(plane)
-	# raise 'Stormy weather - Plane cannot land' if stormy!
-	raise 'The airport is full - Plane not authorized to land' if full?
+	raise 'Stormy weather - Plane cannot land' if stormy!
 	planes << plane
 end 
 

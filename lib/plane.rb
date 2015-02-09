@@ -14,13 +14,11 @@ class Plane
 	end
 
 	def landed!
-		raise 'Stormy weather - Plane cannot land' if stormy!
 		@flying = false
 	end
 
 
 	def takeoff!
-		# raise 'Stormy weather - Plane cannot take off' if stormy!
 		@flying = true
 		self
 	end
