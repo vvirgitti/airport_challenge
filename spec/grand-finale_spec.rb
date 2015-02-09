@@ -9,13 +9,13 @@ describe Finale do
 	let(:plane) {Plane.new}
 	
 	it 'allow all planes to take off and all planes to land' do
-		airport.stormy!
-		6.times {airport.park(plane)}
+		allow(airport).to receive(:stormy!).and_return(false)
 		plane.landed!
-		expect(plane).not_to be_flying
+		6.times {airport.park(plane)}
+		expect(airport.plane_count).to eq 6
 		plane.takeoff!
 		6.times{airport.release(plane)}
-		expect(plane).to be_flying
+		expect(airport.plane_count).to eq 0
 	end
 
 

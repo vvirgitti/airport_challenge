@@ -5,7 +5,6 @@ describe Plane do
 
 
 	let(:plane){Plane.new}
-	let(:weather){double :weather}
 	let(:airport){double :airport}
 
 
